@@ -8,6 +8,15 @@
         <title>Weindatenbank</title>
     </head>
     <body>
+      <h3>Weinliste</h3>
+      <a href="/home">siehe Weine</a>
+            <br/>
+            {% for wein in weine %} 
+            <p>
+                {{ wein.name }}
+            </p>
+            {% endfor %}
+           
         <div class="container">
             <form action="/submit" method="POST">
               <div class="form-group">

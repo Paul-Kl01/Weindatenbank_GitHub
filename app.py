@@ -1,6 +1,7 @@
 # Imports
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql import select
 
 # App initialisieren
 app = Flask(__name__)
@@ -20,12 +21,14 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Datenbank initialisieren
 db = SQLAlchemy(app)
 
+# ---
 # Datenbank Model/Schema erstellen
+# ---
 
 
 class Wein(db.Model):
     __tablename__ = 'wein'
-    id = db.Column(db.Integer, primary_key=True)
+    wein_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(200))
     laden = db.Column(db.String(200))
     art = db.Column(db.String(200))
@@ -44,7 +47,7 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/submit', methods=['POST'])
+@app.route('/submit', methods=['POST','GET'])
 def submit():
     if request.method == 'POST':
         name = request.form['name']
@@ -58,8 +61,18 @@ def submit():
             data = Wein(name, laden, art, sorte)
             db.session.add(data)
             db.session.commit()
-            return render_template('index.html')
+            return redirect('/submit')
         return render_template('index.html', message='You have already submitted feedback')
+    else: 
+        weine = Wein.query.order_by(Wein.name).all()
+        print("Test")
+        return render_template('index.html' )
+
+@app.route('/home', methods=['GET'])
+def getWein():
+        weine = Wein.query.order_by(Wein.name).all()
+        print("Test")
+        return render_template('home.html', weine=weine )
 
 
 # App starten
