@@ -62,18 +62,20 @@ def submit():
             db.session.add(data)
             db.session.commit()
             return redirect('/submit')
-        return render_template('index.html', message='You have already submitted feedback')
+        return render_template('hinzufuegen.html', message='You have already submitted feedback')
     else: 
-        weine = Wein.query.order_by(Wein.name).all()
-        print("Test")
-        return render_template('index.html' )
+        # weine = Wein.query.order_by(Wein.name).all()
+        # print("Test")
+        return render_template('hinzufuegen.html' )
 
-@app.route('/home', methods=['GET'])
+@app.route('/liste', methods=['GET'])
 def getWein():
         weine = Wein.query.order_by(Wein.name).all()
-        print("Test")
-        return render_template('home.html', weine=weine )
+        return render_template('liste.html', weine=weine )
 
+@app.route('/hinzufuegen', methods=['GET'])
+def start():
+    return render_template('hinzufuegen.html')
 
 # App starten
 if __name__ == '__main__':
