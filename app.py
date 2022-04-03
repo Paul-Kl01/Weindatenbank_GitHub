@@ -21,6 +21,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Datenbank initialisieren
 db = SQLAlchemy(app)
 
+
 # ---
 # Datenbank Model/Schema erstellen
 # ---
@@ -65,13 +66,15 @@ class Gericht(db.Model):
 
 class PassendeGerichte(db.Model):
     __tablename__ = 'passendeGerichte'
-    wein_id = db.Column(db.Integer, db.ForeignKey('wein.wein_id'),primary_key=True, nullable=False)
-    gericht_id = db.Column(db.Integer, db.ForeignKey('gericht.gericht_id'),primary_key=True, nullable=False)
+    wein_id = db.Column(db.Integer, db.ForeignKey('wein.wein_id'), primary_key=True, nullable=False)
+    gericht_id = db.Column(db.Integer, db.ForeignKey('gericht.gericht_id'), primary_key=True, nullable=False)
+
 
 class Bewertung(db.Model):
     __tablename__ = 'bewertung'
-    wein_id = db.Column(db.Integer, db.ForeignKey('wein.wein_id'),primary_key=True, nullable=False)
-    nutzer_id = db.Column(db.Integer, db.ForeignKey('nutzer.nutzer_id'),primary_key=True, nullable=False)
+    wein_id = db.Column(db.Integer, db.ForeignKey('wein.wein_id'), primary_key=True, nullable=False)
+    nutzer_id = db.Column(db.Integer, db.ForeignKey('nutzer.nutzer_id'), primary_key=True, nullable=False)
+
 
 # Routing erstellen
 @app.route('/')
@@ -79,11 +82,12 @@ def index():
     weine = Wein.query.order_by(Wein.name).all()
     print(weine)
     wein = random.choice(weine)
-    return render_template('index.html', wein = wein)
+    return render_template('index.html', wein=wein)
+
 
 # TODO besser benennen der requests
 
-@app.route('/submit', methods=['POST','GET'])
+@app.route('/submit', methods=['POST', 'GET'])
 def submit():
     if request.method == 'POST':
         name = request.form['name']
@@ -104,10 +108,11 @@ def submit():
         # print("Test")
         return render_template('hinzufuegen.html')
 
+
 @app.route('/liste', methods=['GET'])
 def getWein():
     weine = Wein.query.order_by(Wein.name).all()
-    return render_template('liste.html', weine=weine )
+    return render_template('liste.html', weine=weine)
 
 
 @app.route('/hinzufuegen', methods=['GET'])
@@ -121,7 +126,8 @@ def searchDB():
     wein = request.form['name']
     print(wein)
     weine = Wein.query.filter_by(name=wein).all()
-    return render_template('liste.html', weine=weine )
+    return render_template('liste.html', weine=weine)
+
 
 # App starten
 if __name__ == '__main__':
