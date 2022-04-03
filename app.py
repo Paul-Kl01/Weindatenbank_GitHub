@@ -3,6 +3,9 @@ from flask import Flask, redirect, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 import random
 
+# Zufallgenerator initialisieren
+random.seed()
+
 # App initialisieren
 app = Flask(__name__)
 
