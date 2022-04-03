@@ -10,6 +10,17 @@ section {
 	height: 100%;
 }
 
+/*
+#landing {
+	background-image: url(wein.jpg);
+	background-position: center center;
+	background-size: cover;
+	background-attachment: fixed;
+	height: 80vh;
+	opacity: 0.5;
+}
+*/
+
 /*Header styling*/
 header {
 	position: fixed;
@@ -50,6 +61,11 @@ header nav ul li a {
 	text-decoration: none;
 	color: gray;
 	font-weight: bold;
+}
+
+header nav ul li a:hover {
+	color: rgb(65, 65, 65);
+	transition: 0.5s;
 }
 
 
