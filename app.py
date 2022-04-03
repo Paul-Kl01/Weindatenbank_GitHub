@@ -2,6 +2,7 @@
 from flask import Flask, redirect, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import select
+import random
 
 # App initialisieren
 app = Flask(__name__)
@@ -44,7 +45,10 @@ class Wein(db.Model):
 # Routing erstellen
 @app.route('/')
 def index():
-    return render_template('index.html')
+    weine = Wein.query.order_by(Wein.name).all()
+    print(weine)
+    wein = random.choice(weine)
+    return render_template('index.html', wein = wein)
 
 
 @app.route('/submit', methods=['POST','GET'])
