@@ -23,6 +23,10 @@
         </header>
         <div class="container">
             <h3>Weinliste</h3>
+            <form action="/search" method="POST">
+              <input type="text" name="name" placeholder="Search..">
+              <input type="submit" value="submit">
+            </form>
             <br/>
             {% for wein in weine %} 
             <p>

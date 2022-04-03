@@ -1,7 +1,6 @@
 # Imports
 from flask import Flask, redirect, render_template, request
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.sql import select
 import random
 
 # App initialisieren
@@ -74,12 +73,21 @@ def submit():
 
 @app.route('/liste', methods=['GET'])
 def getWein():
-        weine = Wein.query.order_by(Wein.name).all()
-        return render_template('liste.html', weine=weine )
+    weine = Wein.query.order_by(Wein.name).all()
+    return render_template('liste.html', weine=weine )
 
 @app.route('/hinzufuegen', methods=['GET'])
 def start():
     return render_template('hinzufuegen.html')
+
+
+@app.route('/search', methods=['POST'])
+def searchDB():
+    print("POST")
+    wein = request.form['name']
+    print(wein)
+    weine = Wein.query.filter_by(name=wein).all()
+    return render_template('liste.html', weine=weine )     
 
 # App starten
 if __name__ == '__main__':
