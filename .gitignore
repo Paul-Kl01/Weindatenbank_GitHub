@@ -1,1 +1,4 @@
 __pycache__
+*.xml
+/.idea/Weindatenbank_GitHub.iml
+/.idea/.gitignore
