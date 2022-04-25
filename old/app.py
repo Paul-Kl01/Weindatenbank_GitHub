@@ -37,6 +37,8 @@ class Wein(db.Model):
     laden = db.Column(db.String(200))
     art = db.Column(db.String(200))
     sorte = db.Column(db.String(200))
+    bewertungen = db.relationship('Bewertung')
+    gerichte = db.relationship('PassendeGerichte')
 
     def __init__(self, name, laden, art, sorte):
         self.name = name
@@ -51,6 +53,7 @@ class Nutzer(db.Model):
     nutzername = db.Column(db.String(200))  # TODO Nutzername unique machen
     email = db.Column(db.String(200))
     passwort = db.Column(db.String(200))
+    bewertungen = db.relationship('Bewertung')
 
     def __init__(self, nutzername, email, passwort):
         self.nutzername = nutzername
@@ -62,6 +65,7 @@ class Gericht(db.Model):
     __tabelname__ = 'gericht'
     gericht_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
+    gerichte = db.relationship('PassendeGerichte')
 
     def __init__(self, name):
         self.name = name
@@ -132,7 +136,7 @@ def searchDB():
     return render_template('liste.html', weine=weine)
 
 
-'''@app.route('/login', methods=['POST', 'GET'])
+@app.route('/login', methods=['POST', 'GET'])
 def createUser():
     
     if request.method == 'POST':
@@ -153,7 +157,7 @@ def createUser():
     else:
         # weine = Wein.query.order_by(Wein.name).all()
         # print("Test")
-        return render_template('hinzufuegen.html')'''
+        return render_template('hinzufuegen.html')
 
 # App starten
 if __name__ == '__main__':
