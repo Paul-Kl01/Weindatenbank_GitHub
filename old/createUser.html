@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../website_wein/static/style.css">
+        <title>Weindatenbank</title>
+    </head>
+    <body>
+        <!--Header-->
+        <header id="header">
+            <div class="logo">
+              <h4 id="l6">LOGO</h4>
+            </div>
+
+        </header>
+
+        <div class="container">
+
+            <div class="form">
+                <form action="/submit" method="POST">
+                  <div class="form-group">
+                    <h3>Nutzername</h3>
+                    <input
+                      type="text"
+                      nutzername="nutzername"
+                      placeholder="Nutzername"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <h3>E-Mail</h3>
+                    <input
+                      type="email"
+                      nutzer_email="nutzer_email"
+                      placeholder="E-Mail"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <h3>Passwort</h3>
+                    <input
+                      type="passwort"
+                      size="20"
+                      maxlength="20"
+                      nutzer_passwort="nutzer_passwort"
+                      placeholder="Passwort"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <h3>Passwort wiederholen</h3>
+                    <input
+                      type="passwort"
+                      size="20"
+                      maxlength="20"
+                      nutzer_wdhl_passwort="nutzer_wdhl_passwort"
+                      placeholder="Passwort wiederholen"
+                      <!-- TODO Passwörter verstecken? -->
+                    />
+                  </div>
+                  <input type="submit" value="Submit" class="btn" />
+                </form>
+              </div>
+        </div>
+    </body>
+</html>
