@@ -8,7 +8,7 @@ class User(db.Model, UserMixin):  # UserMixin -> nur für User nutzen
     email = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
-'''   
+  
 class Wein(db.Model):
     __tablename__ = 'wein'
     wein_id = db.Column(db.Integer, primary_key=True)
@@ -16,16 +16,10 @@ class Wein(db.Model):
     laden = db.Column(db.String(200))
     art = db.Column(db.String(200))
     sorte = db.Column(db.String(200))
-    bewertungen = db.relationship('Bewertung')
-    gerichte = db.relationship('PassendeGerichte')
+    # bewertungen = db.relationship('Bewertung')
+    # gerichte = db.relationship('PassendeGerichte')
 
-    def __init__(self, name, laden, art, sorte):
-        self.name = name
-        self.laden = laden
-        self.art = art
-        self.sorte = sorte
-
-
+''' 
 class Nutzer(db.Model):
     __tablename__ = 'nutzer'
     nutzer_id = db.Column(db.Integer, primary_key=True)

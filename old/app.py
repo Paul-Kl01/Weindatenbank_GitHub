@@ -135,30 +135,6 @@ def searchDB():
     weine = Wein.query.filter_by(name=wein).all()
     return render_template('liste.html', weine=weine)
 
-
-@app.route('/login', methods=['POST', 'GET'])
-def createUser():
-    
-    if request.method == 'POST':
-        nutzername = request.form['nutzername']
-        nutzer_email = request.form['nutzer_email']
-        nutzer_passwort = request.form['nutzer_passwort']
-        sorte = request.form['sorte']
-
-        print(name, laden, art, sorte)
-
-        if db.session.query(Wein).filter(Wein.name == name).count() == 0:
-            data = Wein(name, laden, art, sorte)
-            db.session.add(data)
-            db.session.commit()
-            return redirect('/submit')
-        return render_template('hinzufuegen.html', message='You have already submitted feedback')
-
-    else:
-        # weine = Wein.query.order_by(Wein.name).all()
-        # print("Test")
-        return render_template('hinzufuegen.html')
-
 # App starten
 if __name__ == '__main__':
     db.create_all()
