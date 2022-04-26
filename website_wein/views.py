@@ -1,5 +1,5 @@
 import random
-from flask import Blueprint, render_template, request, flash, jsonify
+from flask import Blueprint, redirect, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
 from .models import *
 import json
@@ -14,8 +14,27 @@ def home():
     wein = random.choice(weine)
     return render_template("home.html", user=current_user, wein=wein)
 
-# @views.route('/liste', methods=['GET'])
-# @login_required
-# def getWein():
-#     weine = Wein.query.order_by(Wein.name).all()
-#     return render_template('liste.html', weine=weine)
+@views.route('/hinzufuegen', methods=['GET'])
+@login_required
+def start():
+    return render_template('hinzufuegen.html', user=current_user)
+
+@views.route('/submit', methods=['POST', 'GET'])
+@login_required
+def submit():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        laden = request.form.get('laden')
+        art = request.form.get('art')
+        sorte = request.form.get('sorte')
+       
+        print(name, laden, art, sorte)
+
+        if db.session.query(Wein).filter(Wein.name == name).count() == 0:
+            data = Wein(name=name, laden=laden, art=art, sorte=sorte)
+            db.session.add(data)
+            db.session.commit()
+            return redirect('/submit')
+        return render_template('hinzufuegen.html', message='You have already submitted feedback')
+    else:
+        return render_template('hinzufuegen.html', user=current_user)
