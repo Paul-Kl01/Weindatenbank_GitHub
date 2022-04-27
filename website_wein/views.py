@@ -6,9 +6,18 @@ import json
 
 views = Blueprint('views', __name__)
 
+# Startseite nach Login
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
+    weine = Wein.query.order_by(Wein.name).all()
+    print(weine)
+    wein = random.choice(weine)
+    return render_template("home.html", user=current_user, wein=wein)
+
+# Startseite ohne Login
+@views.route('/index', methods=['GET', 'POST'])
+def index():
     weine = Wein.query.order_by(Wein.name).all()
     print(weine)
     wein = random.choice(weine)

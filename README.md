@@ -6,7 +6,7 @@ pip install psycopg2 \
 pip install psycopg2-binary \
 pip install flask-sqlalchemy \
 \
-ALternativ:\
+Alternativ:\
 pip install -r Dateipfad\requirements.txt
 
 # Datenbank erstellen: 
